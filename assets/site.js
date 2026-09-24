@@ -584,6 +584,55 @@
     draw('1Y');
   }
 
+  /* ---------------- scroll reveal ---------------- */
+  function reveal() {
+    var els = $$('.rv');
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    els.forEach(function (e) { io.observe(e); });
+  }
+
+  /* ---------------- feature carousel (homepage) ----------------
+     Cards on the right drive the phone on the left; auto-advances,
+     pauses on hover/focus, and stops for reduced-motion users. */
+  function featureCarousel() {
+    var root = $('[data-feats]');
+    if (!root) return;
+    var cards = $$('.feat', root), shots = $$('.device img.swap', root), dots = $$('.feat-dots i', root);
+    var MS = 6000, i = 0, timer = null;
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    root.style.setProperty('--feat-ms', MS + 'ms');
+    function go(n, user) {
+      i = (n + cards.length) % cards.length;
+      cards.forEach(function (c, k) {
+        var on = k === i;
+        c.classList.toggle('on', on);
+        c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        // restart the progress bar animation
+        var bar = $('.bar i', c); if (bar && on) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+      });
+      shots.forEach(function (s, k) { s.classList.toggle('on', k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle('on', k === i); });
+      if (user) track('feature_view', { feature: i + 1 });
+      schedule();
+    }
+    function schedule() {
+      clearTimeout(timer);
+      if (still || root.classList.contains('paused')) return;
+      timer = setTimeout(function () { go(i + 1); }, MS);
+    }
+    cards.forEach(function (c, k) { c.addEventListener('click', function () { go(k, true); }); });
+    ['mouseenter', 'focusin'].forEach(function (ev) { root.addEventListener(ev, function () { root.classList.add('paused'); clearTimeout(timer); }); });
+    ['mouseleave', 'focusout'].forEach(function (ev) { root.addEventListener(ev, function () { root.classList.remove('paused'); schedule(); }); });
+    if (still) root.classList.add('paused');
+    // only run while on screen
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (en) { if (en[0].isIntersecting) schedule(); else clearTimeout(timer); }).observe(root);
+    } else schedule();
+  }
+
   /* ---------------- legacy anchors ----------------
      Privacy and terms used to live on contact.html#privacy / #terms. */
   (function legacyLegalAnchors() {
@@ -595,6 +644,9 @@
 
   /* ---------------- boot ---------------- */
   function boot() {
+    window.mvBooted = true;
+    reveal();
+    featureCarousel();
     $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
     routeCtas();
     initWaitlistForms();

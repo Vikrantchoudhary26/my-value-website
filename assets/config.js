@@ -44,4 +44,10 @@ window.MYVALUE_CONFIG = {
     if (p === 'live' || p === 'prelaunch') c.mode = p;
   } catch (e) {}
   document.documentElement.setAttribute('data-site-mode', c.mode);
+  // Scroll-reveal hook. If site.js never runs, reveal everything anyway.
+  document.documentElement.classList.add('js');
+  setTimeout(function () {
+    var els = document.querySelectorAll('.rv:not(.in)');
+    if (!window.mvBooted) for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+  }, 2500);
 })();
