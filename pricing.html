@@ -4,7 +4,6 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MyValue Pricing — Free to Start, Plus at $5.99/month for Early Members</title>
 <meta name="description" content="Start free with live values. MyValue Plus is $5.99/month for early members — locked for as long as you stay subscribed, $9.99/month for new members after early access. Or $49.99/year.">
-<meta name="keywords" content="MyValue pricing, collection tracker cost, sneaker portfolio app price, $5.99 plan, annual plan">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="canonical" href="https://getmyvalue.app/pricing">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -12,10 +11,10 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MyValue">
 <meta property="og:title" content="MyValue Pricing — Free to Start, Plus at $5.99/month for Early Members"><meta property="og:description" content="Start free with live values. MyValue Plus is $5.99/month for early members — locked for as long as you stay subscribed, $9.99/month for new members after early access. Or $49.99/year.">
-<meta property="og:url" content="https://getmyvalue.app/pricing"><meta property="og:image" content="https://getmyvalue.app/og-image.png">
+<meta property="og:url" content="https://getmyvalue.app/pricing"><meta property="og:image" content="https://myvalue-nine.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MyValue Pricing — Free to Start, Plus at $5.99/month for Early Members">
-<meta name="twitter:description" content="Start free with live values. MyValue Plus is $5.99/month for early members — locked for as long as you stay subscribed, $9.99/month for new members after early access. Or $49.99/year."><meta name="twitter:image" content="https://getmyvalue.app/og-image.png">
+<meta name="twitter:description" content="Start free with live values. MyValue Plus is $5.99/month for early members — locked for as long as you stay subscribed, $9.99/month for new members after early access. Or $49.99/year."><meta name="twitter:image" content="https://myvalue-nine.vercel.app/og-image.png">
 <meta name="theme-color" content="#000000">
 <!-- Live mode: uncomment with the real App Store id to show Safari's native Smart App Banner. -->
 <!-- <meta name="apple-itunes-app" content="app-id=0000000000"> -->
@@ -28,12 +27,12 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="announce" data-announce><div class="wrap"><span>Founding member spots are open.</span> <a href="#waitlist">Join the waitlist →</a></div></div>
+<div class="announce" data-announce hidden><div class="wrap"></div></div>
 <header><div class="wrap nav">
-<a class="logo" href="index.html" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
-<nav class="nav-links" aria-label="Main"><a href="how-it-works.html">How it works</a><a href="pricing.html" style='color:var(--text)'>Pricing</a><a href="features.html">Features</a><a href="asset-classes.html">Asset classes</a></nav>
+<a class="logo" href="/" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
+<nav class="nav-links" aria-label="Main"><a href="/how-it-works">How it works</a><a href="/pricing" style='color:var(--text)'>Pricing</a><a href="/features">Features</a><a href="/asset-classes">Asset classes</a></nav>
 <div class="spacer"></div>
-<a class="btn btn-primary" href="#waitlist" data-cta data-loc="header">See what mine's worth</a>
+<a class="btn btn-primary" href="#waitlist" data-cta data-loc="header" data-live-label="See what mine&#39;s worth">Join the waitlist</a>
 <button class="hamb" aria-label="Open menu">☰</button>
 </div></header>
 <main>
@@ -59,7 +58,7 @@
           <li class="na">Buy/Sell Target (BYNT) alerts</li>
           <li class="na">Full analytics &amp; history</li>
         </ul>
-        <a class="btn btn-outline" href="#waitlist" data-cta data-loc="plan_free">Start free</a>
+        <a class="btn btn-outline" href="#waitlist" data-cta data-loc="plan_free" data-live-label="Start free">Join the waitlist</a>
         <p class="cta-note">No card required.</p>
       </div>
       <div class="plan hot rv">
@@ -74,11 +73,11 @@
           <li>Full analytics &amp; history</li>
           <li>Every asset class</li>
         </ul>
-        <a class="btn btn-primary" href="#waitlist" data-cta data-loc="plan_plus" id="pluscta">Go Plus — $5.99/month</a>
+        <a class="btn btn-primary" href="#waitlist" data-cta data-loc="plan_plus" id="pluscta" data-live-label="Go Plus — $5.99/month">Join the waitlist</a>
         <p class="cta-note">Cancel anytime. No lock-in.</p>
       </div>
     </div>
-    <p class="locknote">Cancel anytime · No card required for Free · Ready in 30 seconds</p>
+    <p class="locknote">Cancel anytime · No card required for Free<span data-show="live"> · Ready in 30 seconds</span></p>
   </div>
 </section>
 
@@ -119,19 +118,19 @@
     <button class="btn btn-primary" type="submit">Join the waitlist</button>
   </form>
   <p class="wl-msg" role="status" aria-live="polite"></p>
-  <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="privacy.html#waitlist">Privacy</a></p>
+  <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="/privacy#waitlist">Privacy</a></p>
 </div>
   </div>
 </section>
 </main>
 <footer><div class="wrap">
 <div class="foot-grid">
-<div><a class="logo" href="index.html" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
+<div><a class="logo" href="/" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
 <p style="color:var(--text-faint);font-size:13.5px;max-width:26ch;margin-top:14px">Live market value for everything you own.</p></div>
 <div class="foot-links">
-<div class="fcol"><b>Product</b><a href="how-it-works.html">How it works</a><a href="pricing.html">Pricing</a><a href="features.html">Features</a><a href="asset-classes.html">Asset classes</a></div>
-<div class="fcol"><b>Company</b><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
-<div class="fcol"><b>Legal</b><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a></div>
+<div class="fcol"><b>Product</b><a href="/how-it-works">How it works</a><a href="/pricing">Pricing</a><a href="/features">Features</a><a href="/asset-classes">Asset classes</a></div>
+<div class="fcol"><b>Company</b><a href="/about">About</a><a href="/contact">Contact</a></div>
+<div class="fcol"><b>Legal</b><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a></div>
 </div></div>
 <p class="fineprint">MyValue provides market value estimates based on live sold data from third-party marketplaces including StockX, GOAT, and eBay. Values are informational and do not constitute appraisals, financial advice, or offers to buy. Marketplace names are trademarks of their respective owners; MyValue is not affiliated with or endorsed by them.</p>
 <div class="foot-base"><span>© <span data-year>2026</span> MyValue · getmyvalue.app</span></div>
@@ -153,7 +152,9 @@ function setBill(m){
   document.getElementById('psub').textContent=an
     ?"Billed once a year — two months free versus paying monthly. Your early-member rate stays locked for as long as you stay subscribed."
     :"Billed monthly. Your $5.99 early-member rate stays locked for as long as you stay subscribed — new members pay $9.99/month once early access ends.";
-  document.getElementById('pluscta').textContent=an?'Go Plus — $49.99/year':'Go Plus — $5.99/month';
+  const cta=document.getElementById('pluscta'), label=an?'Go Plus — $49.99/year':'Go Plus — $5.99/month';
+  cta.setAttribute('data-live-label',label);
+  if(document.documentElement.getAttribute('data-site-mode')==='live') cta.textContent=label;
 }
 </script>
 <script src="assets/site.js" defer></script>

@@ -140,8 +140,8 @@ section{padding:96px 0;}
 .plan ul{list-style:none;margin:0 0 28px;display:grid;gap:11px;flex:1;align-content:start;}
 .plan li{font-size:15px;color:var(--text);padding-left:26px;position:relative;}
 .plan li::before{content:"✓";position:absolute;left:0;top:0;font-weight:700;color:var(--up);}
-.plan li.na{color:var(--text-faint);}
-.plan li.na::before{content:"–";color:var(--text-faint);}
+.plan li.na{color:var(--text-faint);text-decoration:line-through;text-decoration-color:rgba(17,17,17,.3);}
+.plan li.na::before{content:"✕";color:var(--text-faint);font-weight:500;}
 .plan.hot .pdesc,.plan.hot .pprice small,.plan.hot .psub,.plan.hot .cta-note{color:rgba(255,255,255,.7);}
 .plan.hot li,.plan.hot li b{color:#FFF!important;}
 .plan.hot li::before{color:var(--up-bright);}

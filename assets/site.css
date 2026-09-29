@@ -145,9 +145,15 @@ footer .logo-mark{height:22px;}
 .support-card h3{font-size:18px;margin-bottom:8px;letter-spacing:-.02em;}
 .support-card p{color:var(--text-dim);font-size:15px;}
 .support-card a{color:var(--text);border-bottom:1px solid var(--line-strong);}
-.form-msg{font-size:14px;text-align:center;font-weight:500;}
+.form-msg{font-size:14.5px;text-align:center;font-weight:500;border-radius:var(--r-sm);padding:12px 14px;}
 .form-msg:empty{display:none;}
-.form-msg.err{color:var(--loss);}
+.form-msg.ok{background:rgba(21,128,61,.09);color:var(--up);}
+.form-msg.err{background:rgba(220,38,38,.08);color:var(--loss);}
+.field select{width:100%;appearance:none;-webkit-appearance:none;border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:14px 40px 14px 15px;color:var(--text);font:400 15px var(--sans);background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23111' stroke-width='1.8'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E") no-repeat right 16px center;}
+.field select:focus{outline:none;border-color:var(--ink);}
+
+/* pre-launch / live copy variants */
+html[data-site-mode="prelaunch"] [data-show="live"],html[data-site-mode="live"] [data-show="prelaunch"]{display:none;}
 
 /* ---------- sub-page device media ---------- */
 .media .device{margin:0 auto;}

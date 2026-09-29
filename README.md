@@ -19,7 +19,8 @@ Edit `mode` in `assets/config.js` and deploy. Every primary CTA (links marked `d
 
 | | `prelaunch` (now) | `live` |
 |---|---|---|
-| Top bar | Waitlist progress: "X of the first 1,000 founding members" | "MyValue is on the App Store" |
+| Top bar | Hidden until the confirmed count reaches `waitlistMinToShow`, then a progress bar: "X of the first 1,000 founding members" | "MyValue is on the App Store" |
+| CTA labels | "Join the waitlist" | The product label stored in `data-live-label` (e.g. "Start free", "Go Plus — $5.99/month") |
 | Hero and closing CTAs | Email → waitlist, referral link, queue position | iPhone: App Store badge · desktop: QR code + "Email me the link" · Android: send the link to an iPhone |
 | Header, pricing CTAs | Scroll to the waitlist | iPhone: straight to the App Store |
 | Mobile banner | none | Safari: native Smart App Banner · other browsers: fallback banner |
@@ -32,6 +33,18 @@ To preview either mode without changing anything, add `?preview=live` or `?previ
 3. In every page's `<head>`, uncomment `<meta name="apple-itunes-app" content="app-id=…">` and add the real id. Safari only reads this tag from the HTML, so it can't be set from JS.
 4. Set the `APP_STORE_URL` env var (used by `/api/send-link`).
 5. Send the launch email to confirmed waitlist members who haven't unsubscribed (`wl:u:*` where `confirmed=1` and `unsub` is not set).
+
+## Domain switch (brief D1 / P0-1)
+Until getmyvalue.app points at this Vercel project, it still serves the old Framer site. Until then:
+- `og:image`, `twitter:image` and the JSON-LD logo point at `https://myvalue-nine.vercel.app/…` so link previews work today (P0-7). Canonicals and `og:url` still point at getmyvalue.app, pending D1.
+- `vercel.json` sends `X-Robots-Tag: noindex` on the `myvalue-nine.vercel.app` host only, so the preview host never competes with the real domain in search.
+- `vercel.json` already 308-redirects the old Framer routes: `/privacy-policy`, `/terms-of-service` and `/contact-page`. They take effect once the domain points here.
+
+On switch day: add getmyvalue.app to the Vercel project, then run
+`sed -i '' 's#https://myvalue-nine.vercel.app/#https://getmyvalue.app/#g' *.html` so the images come from the real domain.
+
+## Private-beta count
+The "In private beta with N collectors" lines load N from `GET /api/waitlist`. Set it in the Upstash console with `SET site:beta_testers 42`, which takes effect within a minute and needs no deploy. `BETA_TESTERS` in the environment also works as a fallback. With no value set, the lines stay hidden, so a stale number never shows.
 
 ## Waitlist engine (`api/`)
 

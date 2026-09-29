@@ -112,12 +112,18 @@ async function join(req, res) {
 }
 
 async function status(req, res) {
-  if (!L.hasRedis()) return L.json(res, 503, { error: 'not_configured' });
+  if (!L.hasRedis()) {
+    const betaTesters = Number(process.env.BETA_TESTERS || 0) || null;
+    return req.query.code ? L.json(res, 503, { error: 'not_configured' }) : L.json(res, 200, { confirmed: 0, total: 0, betaTesters }, 60);
+  }
   const code = String(req.query.code || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 12);
 
   if (!code) {
-    const [confirmed, total] = await L.redis(['GET', 'wl:confirmed'], ['ZCARD', 'wl:q']);
-    return L.json(res, 200, { confirmed: Number(confirmed || 0), total: Number(total || 0) }, 60);
+    const [confirmed, total, beta] = await L.redis(['GET', 'wl:confirmed'], ['ZCARD', 'wl:q'], ['GET', 'site:beta_testers']);
+    // Private-beta count for the site's social proof: set the Redis key site:beta_testers
+    // (instant, no deploy) or the BETA_TESTERS env var. Absent → null → the line stays hidden.
+    const betaTesters = Number(beta || process.env.BETA_TESTERS || 0) || null;
+    return L.json(res, 200, { confirmed: Number(confirmed || 0), total: Number(total || 0), betaTesters }, 60);
   }
 
   const [email] = await L.redis(['GET', `wl:c:${code}`]);

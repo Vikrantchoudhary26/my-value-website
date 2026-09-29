@@ -4,18 +4,17 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The MyValue Blog — Read the Market for Your Stuff</title>
 <meta name="description" content="Price movements, flip stories, and market reports for sneakers, watches, and collectibles — grounded in live sold data.">
-<meta name="keywords" content="sneaker market report, watch price trends, collectibles market blog, resale market analysis">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://getmyvalue.app/blog">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website"><meta property="og:site_name" content="MyValue">
 <meta property="og:title" content="The MyValue Blog — Read the Market for Your Stuff"><meta property="og:description" content="Price movements, flip stories, and market reports for sneakers, watches, and collectibles — grounded in live sold data.">
-<meta property="og:url" content="https://getmyvalue.app/blog"><meta property="og:image" content="https://getmyvalue.app/og-image.png">
+<meta property="og:url" content="https://getmyvalue.app/blog"><meta property="og:image" content="https://myvalue-nine.vercel.app/og-image.png">
 <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="The MyValue Blog — Read the Market for Your Stuff">
-<meta name="twitter:description" content="Price movements, flip stories, and market reports for sneakers, watches, and collectibles — grounded in live sold data."><meta name="twitter:image" content="https://getmyvalue.app/og-image.png">
+<meta name="twitter:description" content="Price movements, flip stories, and market reports for sneakers, watches, and collectibles — grounded in live sold data."><meta name="twitter:image" content="https://myvalue-nine.vercel.app/og-image.png">
 <meta name="theme-color" content="#000000">
 <!-- Live mode: uncomment with the real App Store id to show Safari's native Smart App Banner. -->
 <!-- <meta name="apple-itunes-app" content="app-id=0000000000"> -->
@@ -28,12 +27,12 @@
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="announce" data-announce><div class="wrap"><span>Founding member spots are open.</span> <a href="#waitlist">Join the waitlist →</a></div></div>
+<div class="announce" data-announce hidden><div class="wrap"></div></div>
 <header><div class="wrap nav">
-<a class="logo" href="index.html" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
-<nav class="nav-links" aria-label="Main"><a href="how-it-works.html">How it works</a><a href="pricing.html">Pricing</a><a href="features.html">Features</a><a href="asset-classes.html">Asset classes</a></nav>
+<a class="logo" href="/" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
+<nav class="nav-links" aria-label="Main"><a href="/how-it-works">How it works</a><a href="/pricing">Pricing</a><a href="/features">Features</a><a href="/asset-classes">Asset classes</a></nav>
 <div class="spacer"></div>
-<a class="btn btn-primary" href="#waitlist" data-cta data-loc="header">See what mine's worth</a>
+<a class="btn btn-primary" href="#waitlist" data-cta data-loc="header" data-live-label="See what mine&#39;s worth">Join the waitlist</a>
 <button class="hamb" aria-label="Open menu">☰</button>
 </div></header>
 <main>
@@ -47,19 +46,18 @@
 
 <section style="padding-top:0">
   <div class="wrap">
-    <a class="featpost rv" href="#">
+    <div class="featpost rv">
       <div>
         <span class="ptag">Market report · 6 min read</span>
         <h2>The Jordan 1 index is up 11% this quarter — here's what's driving it</h2>
         <p>Retro releases slowed, resale supply tightened, and three colorways broke out. What the sold data says about where the market goes next.</p>
-        <span class="readmore">Read the report →</span>
       </div>
       
-    </a>
+    </div>
     <div class="posts">
-      <a class="post rv" href="#"><div class="pbody"><span class="ptag">Watches</span><h3>Why sold comps beat "book value" for watch pricing</h3><div class="pmeta num">4 min read</div></div></a>
-      <a class="post rv" href="#"><div class="pimg">🃏</div><div class="pbody"><span class="ptag">Collectibles</span><h3>Graded vs raw: what the price gap actually looks like</h3><div class="pmeta num">5 min read</div></div></a>
-      <a class="post rv" href="#"><div class="pbody"><span class="ptag">Playbook</span><h3>The alert strategy that catches peaks before they fade</h3><div class="pmeta num">3 min read</div></div></a>
+      <div class="post rv"><div class="pbody"><span class="ptag">Watches</span><h3>Why sold comps beat "book value" for watch pricing</h3><div class="pmeta num">4 min read</div></div></div>
+      <div class="post rv"><div class="pbody"><span class="ptag">Collectibles</span><h3>Graded vs raw: what the price gap actually looks like</h3><div class="pmeta num">5 min read</div></div></div>
+      <div class="post rv"><div class="pbody"><span class="ptag">Playbook</span><h3>The alert strategy that catches peaks before they fade</h3><div class="pmeta num">3 min read</div></div></div>
     </div>
     <div class="ctaband rv" id="waitlist">
       <h2 class="display">Stop reading about the market. <em>Watch yours.</em></h2>
@@ -72,7 +70,7 @@
     <button class="btn btn-primary" type="submit">Join the waitlist</button>
   </form>
   <p class="wl-msg" role="status" aria-live="polite"></p>
-  <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="privacy.html#waitlist">Privacy</a></p>
+  <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="/privacy#waitlist">Privacy</a></p>
 </div>
     </div>
   </div>
@@ -80,12 +78,12 @@
 </main>
 <footer><div class="wrap">
 <div class="foot-grid">
-<div><a class="logo" href="index.html" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
+<div><a class="logo" href="/" aria-label="MyValue home"><svg class="logo-mark" viewBox="0 -1 62 59" aria-hidden="true" focusable="false"><path d="M0 10 L16 10 L30.9 31.7 L45 8.3 L41 6 L61 -0.5 L61.5 16 L56.3 13.5 L30.6 51 L11 22 L11 57 L0 57ZM46 39 L56.5 20.5 L57 20.5 L57 57 L46 57Z"/></svg><span>MyValue</span></a>
 <p style="color:var(--text-faint);font-size:13.5px;max-width:26ch;margin-top:14px">Live market value for everything you own.</p></div>
 <div class="foot-links">
-<div class="fcol"><b>Product</b><a href="how-it-works.html">How it works</a><a href="pricing.html">Pricing</a><a href="features.html">Features</a><a href="asset-classes.html">Asset classes</a></div>
-<div class="fcol"><b>Company</b><a href="about.html">About</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a></div>
-<div class="fcol"><b>Legal</b><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a></div>
+<div class="fcol"><b>Product</b><a href="/how-it-works">How it works</a><a href="/pricing">Pricing</a><a href="/features">Features</a><a href="/asset-classes">Asset classes</a></div>
+<div class="fcol"><b>Company</b><a href="/about">About</a><a href="/contact">Contact</a></div>
+<div class="fcol"><b>Legal</b><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/support">Support</a></div>
 </div></div>
 <p class="fineprint">MyValue provides market value estimates based on live sold data from third-party marketplaces including StockX, GOAT, and eBay. Values are informational and do not constitute appraisals, financial advice, or offers to buy. Marketplace names are trademarks of their respective owners; MyValue is not affiliated with or endorsed by them.</p>
 <div class="foot-base"><span>© <span data-year>2026</span> MyValue · getmyvalue.app</span></div>

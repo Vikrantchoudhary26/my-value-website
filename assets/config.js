@@ -19,9 +19,9 @@ window.MYVALUE_CONFIG = {
   // bar never advertises "3 of 1,000". Below it, the bar shows copy only.
   waitlistMinToShow: 50,
 
-  // Honest social proof. Must be literally true (FTC 16 CFR Part 465).
-  // Set to 0 to hide the line.
-  betaTesters: 42,
+  // The private-beta count is NOT set here (it went stale). It is served by
+  // /api/waitlist from the Redis key `site:beta_testers` (update it in the Upstash
+  // console, no deploy needed) or the BETA_TESTERS env var. No number → line hidden.
 
   // ---- Live mode (fill in before flipping `mode` to 'live') ----
   appStoreUrl: '',          // e.g. 'https://apps.apple.com/app/myvalue/id6470000000'

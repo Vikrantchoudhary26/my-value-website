@@ -112,22 +112,28 @@
     toastTimer = setTimeout(function () { t.hidden = true; }, 6000);
   }
 
-  /* ---------------- honest social proof ---------------- */
-  $$('[data-beta-count]').forEach(function (el) {
-    var n = Number(cfg.betaTesters || 0);
-    var host = el.closest('[data-beta-line]') || el;
-    if (!n) { host.hidden = true; return; }
-    el.textContent = fmtInt(n);
-  });
+  /* ---------------- honest social proof ----------------
+     The beta count comes from /api/waitlist (Redis key site:beta_testers, or the
+     BETA_TESTERS env var). Lines stay hidden unless a real number is available. */
+  function renderBeta(stats) {
+    var n = stats && Number(stats.betaTesters || 0);
+    if (!n) return;
+    $$('[data-beta-count]').forEach(function (el) {
+      el.textContent = fmtInt(n);
+      var host = el.closest('[data-beta-line]');
+      if (host) host.hidden = false;
+    });
+  }
 
   /* ---------------- announcement bar ---------------- */
   function renderAnnounce(stats) {
-    var bar = $('[data-announce] .wrap');
+    var host = $('[data-announce]'), bar = host && $('.wrap', host);
     if (!bar) return;
-    var target = $('#waitlist') ? '#waitlist' : 'index.html#waitlist';
+    var target = $('#waitlist') ? '#waitlist' : '/#waitlist';
     if (LIVE) {
       var href = isIOS ? storeUrl() : target;
       bar.innerHTML = '<span>MyValue is on the App Store.</span> <a href="' + esc(href) + '" data-track="' + (isIOS ? 'badge_click_ios' : 'announce_click') + '">Get the app →</a>';
+      host.hidden = false;
       return;
     }
     if (!stats) return; // keep the static fallback copy
@@ -141,6 +147,7 @@
     bar.innerHTML = text +
       (n < goal ? '<span class="meter" role="progressbar" aria-label="Founding member spots filled" aria-valuemin="0" aria-valuemax="' + goal + '" aria-valuenow="' + n + '"><i></i></span>' : '') +
       ' <a href="' + target + '">Join the waitlist →</a>';
+    host.hidden = false;
     var fill = $('.meter i', bar);
     if (fill) requestAnimationFrame(function () { fill.style.width = pct.toFixed(1) + '%'; });
   }
@@ -149,8 +156,10 @@
   function routeCtas() {
     var hasSlot = !!$('#waitlist');
     $$('a[data-cta]').forEach(function (a) {
-      if (!hasSlot && a.getAttribute('href') === '#waitlist') a.setAttribute('href', 'index.html#waitlist');
+      if (!hasSlot && a.getAttribute('href') === '#waitlist') a.setAttribute('href', '/#waitlist');
       if (!LIVE) return;
+      // Pre-launch labels say "Join the waitlist"; live mode restores the product label.
+      if (a.getAttribute('data-live-label')) a.textContent = a.getAttribute('data-live-label');
       if (isIOS) {
         a.href = storeUrl();
         a.setAttribute('data-track', 'badge_click_ios');
@@ -465,24 +474,28 @@
     var form = $('form[data-contact]');
     if (!form) return;
     var msg = $('.form-msg', form.parentNode);
-    if (params.get('sent') === '1') msg.textContent = "Thanks — your message is on its way. We'll reply by email.";
+    function state(kind, text) { msg.className = 'form-msg ' + kind; msg.textContent = text; }
+    var topic = $('select[name=topic]', form), want = params.get('topic');
+    if (topic && want && $('option[value="' + want.replace(/[^a-z-]/g, '') + '"]', topic)) topic.value = want;
+    if (params.get('sent') === '1') state('ok', "Thanks — your message is on its way. We'll reply by email.");
+    if (params.get('error')) state('err', "We couldn't send that just now. Email support@getmyvalue.app instead.");
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var btn = $('button[type=submit]', form);
       var data = {};
-      $$('input,textarea', form).forEach(function (f) { if (f.name) data[f.name] = f.value; });
-      msg.className = 'form-msg';
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((data.email || '').trim())) { msg.className = 'form-msg err'; msg.textContent = ERRORS.invalid_email; return; }
-      if (!(data.message || '').trim()) { msg.className = 'form-msg err'; msg.textContent = 'Add a message so we know how to help.'; return; }
+      $$('input,textarea,select', form).forEach(function (f) { if (f.name) data[f.name] = f.value; });
+      msg.className = 'form-msg'; msg.textContent = '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((data.email || '').trim())) { state('err', ERRORS.invalid_email); return; }
+      if (!(data.message || '').trim()) { state('err', 'Add a message so we know how to help.'); return; }
       btn.disabled = true;
       fetch(API + '/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { return r.json().catch(function () { return {}; }); })
         .then(function (d) {
           btn.disabled = false;
-          if (d.ok) { msg.textContent = "Thanks — your message is on its way. We'll reply by email."; form.reset(); track('contact_submit'); }
-          else { msg.className = 'form-msg err'; msg.textContent = d.error === 'rate_limited' ? ERRORS.rate_limited : "We couldn't send that just now. Email support@getmyvalue.app instead."; }
+          if (d.ok) { state('ok', "Thanks — your message is on its way. We'll reply by email."); form.reset(); track('contact_submit', { topic: data.topic || '' }); }
+          else state('err', d.error === 'rate_limited' ? ERRORS.rate_limited : "We couldn't send that just now. Email support@getmyvalue.app instead.");
         })
-        .catch(function () { btn.disabled = false; msg.className = 'form-msg err'; msg.textContent = "We couldn't send that just now. Email support@getmyvalue.app instead."; });
+        .catch(function () { btn.disabled = false; state('err', "We couldn't send that just now. Email support@getmyvalue.app instead."); });
     });
   }
 
@@ -496,7 +509,7 @@
     var line = $('.pl-line', svg), base = $('.pl-base', svg), cursor = $('.pl-cursor', svg), dot = $('.pl-dot', area);
     var elValue = $('[data-pc-value]', root), elChange = $('[data-pc-change]', root), elLabel = $('[data-pc-label]', root), elWhen = $('[data-pc-when]', root);
     var W = 520, H = 190, PAD = 12;
-    var END = 24613.48, COST = 19695.26;
+    var END = 24850.00, COST = 19695.26; // END matches the total shown in the app screens (P1-5)
     var RANGES = {
       '1W': { n: 42, start: 24301.10, vol: 0.004, step: 4 * 3600e3, label: 'Portfolio · 1W', seed: 7 },
       '1M': { n: 30, start: 25432.75, vol: 0.009, step: 864e5, label: 'Portfolio · 1M', seed: 11 },
@@ -638,8 +651,8 @@
   (function legacyLegalAnchors() {
     if (!/contact/.test(location.pathname)) return;
     var h = location.hash;
-    if (/^#privacy/.test(h)) location.replace('privacy.html' + (h === '#privacy' ? '' : h));
-    else if (h === '#terms') location.replace('terms.html');
+    if (/^#privacy/.test(h)) location.replace('/privacy' + (h === '#privacy' ? '' : h));
+    else if (h === '#terms') location.replace('/terms');
   })();
 
   /* ---------------- boot ---------------- */
@@ -651,12 +664,11 @@
     routeCtas();
     initWaitlistForms();
     if (LIVE) { renderLive(); renderAnnounce(); }
-    else {
-      restoreWaitlist();
-      if ($('[data-announce]')) {
-        fetch(API + '/waitlist').then(function (r) { return r.ok ? r.json() : null; })
-          .then(renderAnnounce).catch(function () {});
-      }
+    else restoreWaitlist();
+    if ((!LIVE && $('[data-announce]')) || $('[data-beta-count]')) {
+      fetch(API + '/waitlist').then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (stats) { if (!LIVE) renderAnnounce(stats); renderBeta(stats); })
+        .catch(function () {});
     }
     pageEvents();
     contactForm();
