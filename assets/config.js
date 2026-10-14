@@ -24,9 +24,13 @@ window.MYVALUE_CONFIG = {
   // console, no deploy needed) or the BETA_TESTERS env var. No number → line hidden.
 
   // ---- Live mode (fill in before flipping `mode` to 'live') ----
+  // Store links. The hero's App Store / Google Play badges become live links as soon
+  // as these are filled in (works in either mode); until then they show "coming soon".
+  // Paste the plain store URL — referral/campaign params can be included.
   appStoreUrl: '',          // e.g. 'https://apps.apple.com/app/myvalue/id6470000000'
-  appStoreBadgeSrc: '',     // official Apple badge SVG, e.g. 'assets/app-store-badge.svg'
-  playStoreUrl: '',         // leave empty while the app is iOS-only
+  playStoreUrl: '',         // e.g. 'https://play.google.com/store/apps/details?id=app.myvalue'
+  appStoreBadgeSrc: 'assets/badges/app-store.svg',   // official Apple badge
+  playStoreBadgeSrc: 'assets/badges/google-play.png', // official Google badge
   appleProviderToken: '',   // App Store Connect → App Analytics → Campaigns → "pt"
   // utm_source → Custom Product Page id (ppid). Unknown sources use the default page.
   customProductPages: {

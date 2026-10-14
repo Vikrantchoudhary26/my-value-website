@@ -34,6 +34,9 @@ To preview either mode without changing anything, add `?preview=live` or `?previ
 4. Set the `APP_STORE_URL` env var (used by `/api/send-link`).
 5. Send the launch email to confirmed waitlist members who haven't unsubscribed (`wl:u:*` where `confirmed=1` and `unsub` is not set).
 
+## Store badges (hero)
+The hero shows the official App Store and Google Play badges under the waitlist form. To make them links, paste the store URLs (referral or campaign links are fine) into `appStoreUrl` and `playStoreUrl` in `assets/config.js`. Until both are set, the badges aren't clickable and a "Coming soon" line shows underneath. Badge artwork comes from Apple and Google (`assets/badges/`); don't recolour or redraw it.
+
 ## Domain switch (brief D1 / P0-1)
 Until getmyvalue.app points at this Vercel project, it still serves the old Framer site. Until then:
 - `og:image`, `twitter:image` and the JSON-LD logo point at `https://myvalue-nine.vercel.app/…` so link previews work today (P0-7). Canonicals and `og:url` still point at getmyvalue.app, pending D1.

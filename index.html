@@ -46,7 +46,7 @@
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/site.css">
 <link rel="stylesheet" href="assets/home.css">
-<link rel="preload" as="image" href="assets/app/home-light.webp" type="image/webp">
+<link rel="preload" as="image" href="assets/app/assets-light.webp" type="image/webp">
 </head>
 <body>
 <div class="announce" data-announce hidden><div class="wrap"></div></div>
@@ -77,12 +77,17 @@
         <p class="wl-msg" role="status" aria-live="polite"></p>
         <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="/privacy#waitlist">Privacy</a></p>
       </div>
-      <p class="hero-note rv"><span data-show="prelaunch">Launching on iPhone · Free to start · No card required</span><span data-show="live">Free on iPhone · No card required · Ready in 30 seconds</span></p>
+      <div class="store-badges rv" data-store-badges>
+        <a class="store-link" data-store="ios" aria-disabled="true"><img src="assets/badges/app-store.svg" alt="Download on the App Store" width="150" height="50"></a>
+        <a class="store-link" data-store="android" aria-disabled="true"><img src="assets/badges/google-play.png" alt="Get it on Google Play" width="169" height="50"></a>
+        <p class="store-soon" data-store-soon>Coming soon to the App Store and Google Play.</p>
+      </div>
+      <p class="hero-note rv"><span data-show="prelaunch">Free to start · No card required</span><span data-show="live">Free to start · No card required · Ready in 30 seconds</span></p>
     </div>
     <div class="home-hero-art" aria-hidden="true">
-      <figure class="device tilt-l scene-a" style="--w:250px"><img src="assets/app/scan-light.webp" alt="" width="640" height="1427" fetchpriority="high"></figure>
+      <figure class="device tilt-l scene-a" style="--w:250px"><img src="assets/app/scan-light.webp" alt="" width="382" height="848" fetchpriority="high"></figure>
       <svg class="scribble" viewBox="0 0 120 70" fill="none"><path d="M4 52c18 6 36 2 44-12 7-12-2-26-12-20-12 8 4 34 30 34 16 0 34-10 46-26" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M104 18l8 10-12 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <figure class="device tilt-r scene-b" style="--w:270px"><img src="assets/app/home-light.webp" alt="" width="640" height="1414" fetchpriority="high"></figure>
+      <figure class="device tilt-r scene-b" style="--w:270px"><img src="assets/app/assets-light.webp" alt="" width="382" height="848" fetchpriority="high"></figure>
       <div class="chip chip-1"><img src="assets/app/thumb-watch.webp" alt="" width="48" height="48" loading="lazy"><span><b>Rolex Submariner</b><em class="num">$12,500 <i class="up">+8.2%</i></em></span></div>
       <div class="chip chip-2"><img src="assets/app/thumb-bag.webp" alt="" width="48" height="48" loading="lazy"><span><b>Hermès Birkin 30</b><em class="num">$8,200 <i class="up">+15.3%</i></em></span></div>
       <div class="chip chip-3"><img src="assets/app/thumb-sneaker.webp" alt="" width="48" height="48" loading="lazy"><span><b>Nike Air Jordan 1</b><em class="num">$1,850 <i class="dn">−2.1%</i></em></span></div>
@@ -110,10 +115,10 @@
     <div class="feat-grid" data-feats>
       <div class="feat-media">
         <figure class="device" style="--w:300px">
-        <img class="swap on" src="assets/app/scan-dark.webp" alt="MyValue scan screen framing a watch" width="640" height="1400" loading="lazy">
-        <img class="swap" src="assets/app/item-detail-light.webp" alt="MyValue item screen showing a Rolex Submariner value chart" width="640" height="1400" loading="lazy">
-        <img class="swap" src="assets/app/assets-light.webp" alt="MyValue assets screen listing a collection with live values" width="640" height="1400" loading="lazy">
-        <img class="swap" src="assets/app/item-detail-dark.webp" alt="MyValue item screen with alert controls and an all-time chart" width="640" height="1400" loading="lazy">
+        <img class="swap on" src="assets/app/scan-dark.webp" alt="MyValue scan screen framing a watch" width="382" height="848" loading="lazy">
+        <img class="swap" src="assets/app/item-detail-light.webp" alt="MyValue item screen showing a Rolex Submariner value chart" width="382" height="848" loading="lazy">
+        <img class="swap" src="assets/app/home-dark.webp" alt="MyValue home screen with total asset value and each item's live price" width="382" height="848" loading="lazy">
+        <img class="swap" src="assets/app/item-detail-dark.webp" alt="MyValue item screen with alert controls and an all-time chart" width="382" height="848" loading="lazy">
         </figure>
         <div class="feat-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></div>
       </div>
@@ -133,6 +138,23 @@
       </div>
     </div>
     <p class="hiw-more rv"><a class="ulink" href="/how-it-works">See how it works →</a></p>
+  </div>
+</section>
+
+<!-- ============ ONBOARDING ============ -->
+<section class="onboard">
+  <div class="wrap">
+    <div class="sec-head center rv">
+      <h2 class="display">Personalized from the <em class="accent">first tap.</em></h2>
+    </div>
+  </div>
+  <div class="onboard-rail" tabindex="0" role="region" aria-label="MyValue onboarding screens (scrolls sideways)">
+      <figure class="device" style="--w:230px"><img src="assets/app/onb-focus.webp" alt="Onboarding: choose your primary focus — track, net worth, growth or insights" width="402" height="874" loading="lazy"></figure>
+      <figure class="device" style="--w:230px"><img src="assets/app/onb-frequency.webp" alt="Onboarding: pick how often you check your assets" width="402" height="874" loading="lazy"></figure>
+      <figure class="device" style="--w:230px"><img src="assets/app/onb-insights.webp" alt="Onboarding: set how detailed your insights should be" width="402" height="874" loading="lazy"></figure>
+      <figure class="device" style="--w:230px"><img src="assets/app/onb-theme.webp" alt="Onboarding: choose light or dark mode" width="402" height="874" loading="lazy"></figure>
+      <figure class="device" style="--w:230px"><img src="assets/app/onb-building.webp" alt="Onboarding: building your personalized plan" width="402" height="874" loading="lazy"></figure>
+      <figure class="device" style="--w:230px"><img src="assets/app/onb-plan.webp" alt="Onboarding: your plan is ready, with daily, weekly and monthly recommendations" width="402" height="874" loading="lazy"></figure>
   </div>
 </section>
 
@@ -202,8 +224,8 @@
       <p class="mode-sub">Every screen, light or dark — your portfolio looks right at 2&nbsp;a.m. and at noon.</p>
     </div>
     <div class="mode-art" aria-hidden="true">
-      <figure class="device tilt-l" style="--w:240px"><img src="assets/app/home-dark.webp" alt="" width="640" height="1420" loading="lazy"></figure>
-      <figure class="device tilt-r" style="--w:260px"><img src="assets/app/assets-dark.webp" alt="" width="640" height="1420" loading="lazy"></figure>
+      <figure class="device tilt-l" style="--w:240px"><img src="assets/app/home-dark.webp" alt="" width="382" height="848" loading="lazy"></figure>
+      <figure class="device tilt-r" style="--w:260px"><img src="assets/app/assets-dark.webp" alt="" width="382" height="848" loading="lazy"></figure>
     </div>
   </div>
 </section>

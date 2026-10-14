@@ -376,7 +376,7 @@
         block.innerHTML = '<div class="store-cta">' + badgeHtml(loc) + '</div>';
       } else if (isAndroid) {
         block.innerHTML = cfg.playStoreUrl
-          ? '<div class="store-cta"><a class="store-badge" href="' + esc(cfg.playStoreUrl) + '" data-track="badge_click_android" data-loc="' + esc(loc) + '"><span><small>Get it on</small>Google Play</span></a></div>'
+          ? '<div class="store-cta"><a class="store-badge img" href="' + esc(cfg.playStoreUrl) + '" data-track="badge_click_android" data-loc="' + esc(loc) + '"><img src="' + esc(cfg.playStoreBadgeSrc || 'assets/badges/google-play.png') + '" alt="Get it on Google Play" height="52"></a></div>'
           : '<div class="store-cta"><div class="store-side"><p class="store-note">MyValue is iPhone-only for now. Send the link to your iPhone:</p>' + sendLinkForm('sl-' + i) + '</div></div>';
       } else {
         block.innerHTML = '<div class="store-cta"><div class="qr" data-qr aria-label="QR code linking to MyValue on the App Store" role="img"></div>' +
@@ -448,6 +448,24 @@
       store.set('mv_banner_x', Date.now());
       el.remove();
       document.body.style.paddingBottom = '';
+    });
+  }
+
+  /* ---------------- store badges (hero) ----------------
+     Official badges; they turn into links once the URLs exist in config. */
+  function storeBadges() {
+    $$('[data-store-badges]').forEach(function (box) {
+      var links = { ios: storeUrl(), android: cfg.playStoreUrl || '' };
+      ['ios', 'android'].forEach(function (k) {
+        var a = $('[data-store=' + k + ']', box);
+        if (!a || !links[k]) return;
+        a.href = links[k];
+        a.removeAttribute('aria-disabled');
+        a.setAttribute('data-track', k === 'ios' ? 'badge_click_ios' : 'badge_click_android');
+        a.setAttribute('data-loc', 'hero_badges');
+      });
+      var soon = $('[data-store-soon]', box);
+      if (soon) soon.hidden = !!(links.ios && links.android);
     });
   }
 
@@ -670,6 +688,7 @@
         .then(function (stats) { if (!LIVE) renderAnnounce(stats); renderBeta(stats); })
         .catch(function () {});
     }
+    storeBadges();
     pageEvents();
     contactForm();
     portfolioChart();
