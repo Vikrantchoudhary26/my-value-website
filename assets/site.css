@@ -191,3 +191,9 @@ html[data-site-mode="prelaunch"] [data-show="live"],html[data-site-mode="live"] 
   .center .store-cta,.final .store-cta,.invert .store-cta,.ctaband .store-cta,.solo .store-cta{align-items:center;}
   .store-side{max-width:none;align-self:stretch;}
 }
+
+/* ---------- LaunchList waitlist embed ----------
+   The form itself renders in LaunchList's shadow DOM (style it in the LaunchList
+   dashboard). This only reserves space so the page doesn't jump while it loads. */
+.ll-form{min-height:58px;}
+.center .ll-form,.final .ll-form,.invert .ll-form,.ctaband .ll-form,.solo .ll-form{margin-left:auto;margin-right:auto;}

@@ -27,6 +27,7 @@
 <!-- Live mode: uncomment with the real App Store id to show Safari's native Smart App Banner. -->
 <!-- <meta name="apple-itunes-app" content="app-id=0000000000"> -->
 <script src="assets/config.js"></script>
+<script src="https://embed.getlaunchlist.com/v1/embed.js" async></script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":"Organization","@id":"https://getmyvalue.app/#org","name":"MyValue","url":"https://getmyvalue.app/","logo":"https://myvalue-nine.vercel.app/logo.png","sameAs":[]},
@@ -67,14 +68,7 @@
       <h1 class="display rv">Your closet is a <em class="accent">portfolio.</em><br>Track it like one.</h1>
       <p class="sub rv">MyValue tracks the live market value of your sneakers, watches, and more — <b>real prices from StockX, GOAT, and eBay</b>, updated as the market moves.</p>
       <div class="wl rv" data-wl data-source="hero">
-        <form class="wl-form" data-waitlist action="/api/waitlist" method="post">
-          <label class="sr-only" for="wl-hero">Email address</label>
-          <input id="wl-hero" type="email" name="email" autocomplete="email" required placeholder="you@example.com">
-          <input type="hidden" name="ref"><input type="hidden" name="utm"><input type="hidden" name="source" value="hero">
-          <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <button class="btn btn-primary" type="submit">Join the waitlist</button>
-        </form>
-        <p class="wl-msg" role="status" aria-live="polite"></p>
+        <div class="ll-form" data-launchlist-form="frm_nqkpffdnjhf4"></div>
         <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="/privacy#waitlist">Privacy</a></p>
       </div>
       <div class="store-badges rv" data-store-badges>
@@ -337,14 +331,7 @@
     <h2>Your things are worth tracking.</h2>
     <p>Know what your collection is actually worth — live.</p>
     <div class="wl" data-wl data-source="home-final">
-      <form class="wl-form" data-waitlist action="/api/waitlist" method="post">
-        <label class="sr-only" for="wl-home-final">Email address</label>
-        <input id="wl-home-final" type="email" name="email" autocomplete="email" required placeholder="you@example.com">
-        <input type="hidden" name="ref"><input type="hidden" name="utm"><input type="hidden" name="source" value="home-final">
-        <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn btn-primary" type="submit">Join the waitlist</button>
-      </form>
-      <p class="wl-msg" role="status" aria-live="polite"></p>
+      <div class="ll-form" data-launchlist-form="frm_nqkpffdnjhf4"></div>
       <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="/privacy#waitlist">Privacy</a></p>
     </div>
     <div class="final-devices" aria-hidden="true"><figure class="device" style="--w:200px"><img src="assets/app/item-detail-dark.webp" alt="" loading="lazy"></figure><figure class="device" style="--w:220px"><img src="assets/app/home-dark.webp" alt="" loading="lazy"></figure><figure class="device" style="--w:200px"><img src="assets/app/assets-dark.webp" alt="" loading="lazy"></figure></div>

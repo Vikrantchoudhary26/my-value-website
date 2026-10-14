@@ -451,6 +451,42 @@
     });
   }
 
+  /* ---------------- LaunchList waitlist ----------------
+     embed.getlaunchlist.com mounts each [data-launchlist-form] into an open
+     shadow root once its script loads. Submit events don't cross the shadow
+     boundary, so attach the analytics listener inside each root. */
+  function launchList() {
+    var hosts = $$('[data-launchlist-form]');
+    if (!hosts.length) return;
+    var tries = 0;
+    (function attach() {
+      var pending = 0;
+      hosts.forEach(function (h) {
+        if (h.__mvTracked) return;
+        if (!h.shadowRoot) { pending++; return; }
+        h.__mvTracked = true;
+        var block = h.closest('[data-wl]');
+        // Fit the embed to the site: no visible "Email *" label (the input keeps
+        // aria-label="Email"), left-aligned outside centred sections, and a white
+        // button on the dark bands, where LaunchList's #0a0a0a button disappears.
+        var dark = !!h.closest('.invert, .ctaband, .dark-band');
+        var centred = !!h.closest('.center, .final, .invert, .ctaband, .solo');
+        var st = document.createElement('style');
+        st.textContent =
+          '[class*="--ll-label"]{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;}' +
+          '.ll-root{max-width:500px!important;' + (centred ? '' : 'margin-left:0!important;margin-right:0!important;') + '}' +
+          '.ll-input{border-radius:12px!important;font-size:15px!important;height:48px!important;}' +
+          'button[type=submit]{border-radius:12px!important;height:48px!important;font-size:15px!important;}' +
+          (dark ? '.ll-root{--primary:#ffffff!important;--ring:#ffffff!important;--primary-foreground:#0a0a0a!important;}' : '');
+        h.shadowRoot.appendChild(st);
+        h.shadowRoot.addEventListener('submit', function () {
+          track('waitlist_submit', { source: block ? block.getAttribute('data-source') : '', provider: 'launchlist' });
+        }, true);
+      });
+      if (pending && ++tries < 40) setTimeout(attach, 250); // up to ~10s for the async embed
+    })();
+  }
+
   /* ---------------- store badges (hero) ----------------
      Official badges; they turn into links once the URLs exist in config. */
   function storeBadges() {
@@ -682,7 +718,10 @@
     routeCtas();
     initWaitlistForms();
     if (LIVE) { renderLive(); renderAnnounce(); }
-    else restoreWaitlist();
+    // The built-in waitlist form only restores its "you're on the list" panel when
+    // it is actually on the page; LaunchList blocks manage their own state.
+    else if ($('form[data-waitlist]')) restoreWaitlist();
+    if (!LIVE) launchList();
     if ((!LIVE && $('[data-announce]')) || $('[data-beta-count]')) {
       fetch(API + '/waitlist').then(function (r) { return r.ok ? r.json() : null; })
         .then(function (stats) { if (!LIVE) renderAnnounce(stats); renderBeta(stats); })

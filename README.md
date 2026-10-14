@@ -49,6 +49,16 @@ On switch day: add getmyvalue.app to the Vercel project, then run
 ## Private-beta count
 The "In private beta with N collectors" lines load N from `GET /api/waitlist`. Set it in the Upstash console with `SET site:beta_testers 42`, which takes effect within a minute and needs no deploy. `BETA_TESTERS` in the environment also works as a fallback. With no value set, the lines stay hidden, so a stale number never shows.
 
+## Waitlist (LaunchList)
+Every "Join the waitlist" form is the LaunchList embed (`frm_nqkpffdnjhf4`): `<div data-launchlist-form="…">` inside each `[data-wl]` block, plus `embed.getlaunchlist.com/v1/embed.js` in the `<head>` of pages that have a form. Signups, confirmation emails, referrals and queue positions are all handled in the LaunchList dashboard, and the form's fields and copy are edited there too.
+
+- `site.js` injects a small stylesheet into each form's shadow root. It hides the visual "Email" label (the input keeps `aria-label`), left-aligns the form in the hero, and turns the button white on dark bands. Everything else comes from the LaunchList theme.
+- Submissions are tracked as `waitlist_submit` with `provider: "launchlist"`.
+- In live mode, the form slots are still replaced by the App Store CTA / QR code.
+- The top-bar progress bar reads its count from our own `/api/waitlist`, so it stays hidden while signups go to LaunchList.
+
+The self-hosted engine below is kept in `api/` but no page uses it for signups. `GET /api/waitlist` still serves the beta count.
+
 ## Waitlist engine (`api/`)
 
 - `POST /api/waitlist` takes an email. The response includes the queue position and a unique referral link, and the person gets a double opt-in email. The endpoint also accepts a plain form post, so signup still works without JS.

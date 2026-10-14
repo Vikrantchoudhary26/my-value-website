@@ -19,6 +19,7 @@
 <!-- Live mode: uncomment with the real App Store id to show Safari's native Smart App Banner. -->
 <!-- <meta name="apple-itunes-app" content="app-id=0000000000"> -->
 <script src="assets/config.js"></script>
+<script src="https://embed.getlaunchlist.com/v1/embed.js" async></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://getmyvalue.app/"},{"@type":"ListItem","position":2,"name":"Start","item":"https://getmyvalue.app/start"}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,14 +37,7 @@
     <h1 class="display">Your closet is a <em class="accent">portfolio.</em><br>Track it like one.</h1>
     <p class="sub">MyValue tracks the live market value of your sneakers, watches, and more — <b>real prices from StockX, GOAT, and eBay</b>, updated as the market moves.</p>
     <div class="wl" data-wl data-source="start">
-      <form class="wl-form" data-waitlist action="/api/waitlist" method="post">
-        <label class="sr-only" for="wl-start">Email address</label>
-        <input id="wl-start" type="email" name="email" autocomplete="email" required placeholder="you@example.com">
-        <input type="hidden" name="ref"><input type="hidden" name="utm"><input type="hidden" name="source" value="start">
-        <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <button class="btn btn-primary" type="submit">Join the waitlist</button>
-      </form>
-      <p class="wl-msg" role="status" aria-live="polite"></p>
+      <div class="ll-form" data-launchlist-form="frm_nqkpffdnjhf4"></div>
       <p class="wl-legal">We'll email you to confirm your spot. No spam, unsubscribe anytime. <a href="/privacy#waitlist">Privacy</a></p>
     </div>
     <p class="hero-proof" data-beta-line>Now in private beta with <b class="num" data-beta-count>42</b> collectors.</p>
