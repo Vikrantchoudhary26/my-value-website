@@ -197,3 +197,12 @@ html[data-site-mode="prelaunch"] [data-show="live"],html[data-site-mode="live"] 
    dashboard). This only reserves space so the page doesn't jump while it loads. */
 .ll-form{min-height:58px;}
 .center .ll-form,.final .ll-form,.invert .ll-form,.ctaband .ll-form,.solo .ll-form{margin-left:auto;margin-right:auto;}
+
+/* policy header block (entity / contact / location) */
+.policy-meta{display:grid;gap:10px;margin:0 0 36px;padding:0 0 28px;border-bottom:1px solid var(--line);}
+.policy-meta div{display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:15px;}
+.policy-meta dt{color:var(--text-faint);font-weight:500;}
+.policy-meta dd{color:var(--text);}
+.policy-meta a{color:var(--text);border-bottom:1px solid var(--line-strong);}
+.policy ul ul{margin:8px 0 0 18px;}
+@media (max-width:560px){.policy-meta div{grid-template-columns:1fr;gap:2px;}}
