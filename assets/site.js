@@ -30,15 +30,16 @@
   };
 
   /* ---------------- analytics ----------------
-     Named events from the build brief. Provider-agnostic: pushes to
-     window.dataLayer (GTM) and forwards to Plausible / gtag / PostHog if
-     their snippet is on the page. Add ?debug=1 to log events. */
+     Named events from the build brief, pushed to window.dataLayer for the
+     Google Tag Manager container (GTM-NCTCZ6PM, loaded in every <head>).
+     Not also sent through gtag(): with GTM that would count each event twice.
+     Forwards to Plausible / PostHog if their snippet is ever added.
+     Add ?debug=1 to log events. */
   function track(name, props) {
     props = props || {};
     try {
       (window.dataLayer = window.dataLayer || []).push(Object.assign({ event: name }, props));
       if (typeof window.plausible === 'function') window.plausible(name, { props: props });
-      if (typeof window.gtag === 'function') window.gtag('event', name, props);
       if (window.posthog && typeof window.posthog.capture === 'function') window.posthog.capture(name, props);
       if (params.get('debug') === '1') console.info('[track]', name, props);
     } catch (e) {}
