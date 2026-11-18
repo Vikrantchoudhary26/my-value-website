@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /start
 
-Sitemap: https://getmyvalue.app/sitemap.xml
+Sitemap: https://www.getmyvalue.app/sitemap.xml

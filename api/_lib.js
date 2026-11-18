@@ -19,7 +19,7 @@ const crypto = require('crypto');
 
 const REDIS_URL = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
 const REDIS_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
-const SITE_URL = (process.env.SITE_URL || 'https://getmyvalue.app').replace(/\/$/, '');
+const SITE_URL = (process.env.SITE_URL || 'https://www.getmyvalue.app').replace(/\/$/, '');
 
 function hasRedis() { return Boolean(REDIS_URL && REDIS_TOKEN); }
 function hasMail() { return Boolean(process.env.RESEND_API_KEY && process.env.MAIL_FROM); }

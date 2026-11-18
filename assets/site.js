@@ -346,6 +346,9 @@
     qrLib = new Promise(function (resolve, reject) {
       var s = document.createElement('script');
       s.src = 'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js';
+      // Subresource Integrity: the browser refuses the file if the CDN copy changes.
+      s.integrity = 'sha384-lQXOAyZwHXE55JFyrOMB7nY2Wv+m5ZWNtJcHrd1rceRQXAYNLak8ukN5TjBTcIwz';
+      s.crossOrigin = 'anonymous';
       s.async = true;
       s.onload = function () { resolve(window.qrcode); };
       s.onerror = reject;

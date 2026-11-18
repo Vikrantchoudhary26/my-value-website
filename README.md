@@ -37,14 +37,14 @@ To preview either mode without changing anything, add `?preview=live` or `?previ
 ## Store badges (hero)
 The hero shows the official App Store and Google Play badges under the waitlist form. To make them links, paste the store URLs (referral or campaign links are fine) into `appStoreUrl` and `playStoreUrl` in `assets/config.js`. Until both are set, the badges aren't clickable and a "Coming soon" line shows underneath. Badge artwork comes from Apple and Google (`assets/badges/`); don't recolour or redraw it.
 
-## Domain switch (brief D1 / P0-1)
-Until getmyvalue.app points at this Vercel project, it still serves the old Framer site. Until then:
-- `og:image`, `twitter:image` and the JSON-LD logo point at `https://myvalue-nine.vercel.app/…` so link previews work today (P0-7). Canonicals and `og:url` still point at getmyvalue.app, pending D1.
-- `vercel.json` sends `X-Robots-Tag: noindex` on the `myvalue-nine.vercel.app` host only, so the preview host never competes with the real domain in search.
-- `vercel.json` already 308-redirects the old Framer routes: `/privacy-policy`, `/terms-of-service` and `/contact-page`. They take effect once the domain points here.
-
-On switch day: add getmyvalue.app to the Vercel project, then run
-`sed -i '' 's#https://myvalue-nine.vercel.app/#https://getmyvalue.app/#g' *.html` so the images come from the real domain.
+## Domain, SEO and security
+- **One host:** `https://www.getmyvalue.app`. The apex 308-redirects there, so canonicals, `og:url`, `og:image`, the sitemap and JSON-LD all use `www`. Don't reintroduce apex URLs; a canonical that redirects is a mixed signal to Google.
+- `myvalue-nine.vercel.app` gets `X-Robots-Tag: noindex`, so it never competes in search. Old Framer routes (`/privacy-policy`, `/terms-of-service`, `/contact-page`) 308 to the new pages.
+- `sitemap.xml` lists indexable pages only. `/blog` and `/start` are `noindex`. Update `<lastmod>` when a page changes meaningfully. `robots.txt` blocks `/api/` and `/start`.
+- Search Console is verified two ways: `googlef39e8242efa336cf.html` and the meta tag on the homepage. Keep both.
+- **Security headers** (all in `vercel.json`): HSTS with subdomains and preload, a Content-Security-Policy, nosniff, frame protection, COOP, a locked-down Permissions-Policy, and `noindex` on `/api/*`. Contact info for security reports is at `/.well-known/security.txt` (renew `Expires` yearly).
+- **Adding a third-party script** (a new tag in Tag Manager, a chat widget, etc.): add its domains to the matching CSP directive in `vercel.json` (`script-src`, `connect-src`, `img-src`, `frame-src`, `font-src`), or the browser will block it. Check the browser console for "Refused to…" errors after publishing.
+- The QR-code library from jsDelivr is pinned with Subresource Integrity in `site.js`. If you change its version, update the `integrity` hash.
 
 ## Private-beta count
 The "In private beta with N collectors" lines load N from `GET /api/waitlist`. Set it in the Upstash console with `SET site:beta_testers 42`, which takes effect within a minute and needs no deploy. `BETA_TESTERS` in the environment also works as a fallback. With no value set, the lines stay hidden, so a stale number never shows.
